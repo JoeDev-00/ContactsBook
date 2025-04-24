@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+
+{% block title %}Supprimer {{ contact }} - ContactBook{% endblock %}
+
+{% block content %}
+<div class="row mb-4">
+    <div class="col-md-8">
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="{% url 'dashboard' %}">Tableau de bord</a></li>
+                <li class="breadcrumb-item"><a href="{% url 'contact_list' %}">Contacts</a></li>
+                <li class="breadcrumb-item"><a href="{% url 'contact_detail' contact.id %}">{{ contact }}</a></li>
+                <li class="breadcrumb-item active" aria-current="page">Supprimer</li>
+            </ol>
+        </nav>
+    </div>
+    <div class="col-md-4 text-end">
+        <a href="{% url 'contact_detail' contact.id %}" class="btn btn-outline-secondary">
+            <i class="fas fa-arrow-left me-1"></i> Retour
+        </a>
+    </div>
+</div>
+
+<div class="card">
+    <div class="card-header bg-danger text-white">
+        <h5 class="card-title mb-0">
+            <i class="fas fa-trash me-2"></i> Supprimer le contact
+        </h5>
+    </div>
+    <div class="card-body">
+        <p class="lead">Êtes-vous sûr de vouloir supprimer le contact <strong>{{ contact }}</strong> ?</p>
+        <p>Cette action déplacera le contact dans la corbeille. Vous pourrez le restaurer ultérieurement.</p>
+        
+        <form method="post">
+            {% csrf_token %}
+            <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                <a href="{% url 'contact_detail' contact.id %}" class="btn btn-outline-secondary">Annuler</a>
+                <button type="submit" class="btn btn-danger">
+                    <i class="fas fa-trash me-1"></i> Supprimer
+                </button>
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock %}
