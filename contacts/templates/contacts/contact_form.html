@@ -5,12 +5,12 @@
 
 {% block content %}
 
-    
-    <div class="col-md-4 return">
-        <a href="{% url 'contact_list' %}" class="btn btn-outline-secondary">
-            <i class="fas fa-arrow-left me-1"></i> Retour
-        </a>
-    </div>
+
+<div class="col-md-4 return">
+    <a href="{% url 'contact_list' %}" class="btn btn-outline-secondary">
+        <i class="fas fa-arrow-left me-1"></i> Retour
+    </a>
+</div>
 
 <div class="card">
     <div class="card-header bg-light">
@@ -43,8 +43,8 @@
                     </div>
                     {% endif %}
                     <img id="avatar-preview" class="img-thumbnail mt-3 rounded-circle object-fit-cover overflow-hidden"
-                    src="{% static 'images/profil.jpg' %}" alt="profil"
-                    style="max-height: 150px; max-width: 150px; ">
+                        src="{% static 'images/profil.jpg' %}" alt="profil"
+                        style="max-height: 150px; max-width: 150px; ">
 
 
                     <div class="form-text">Formats acceptés : JPG, PNG, GIF. Taille maximale : 2 Mo.</div>

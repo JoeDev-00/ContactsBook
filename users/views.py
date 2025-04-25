@@ -9,7 +9,22 @@ from django.http import JsonResponse
 from .forms import CustomUserCreationForm, CustomAuthenticationForm, UserPreferencesForm
 from .models import UserSession
 from contacts.models import Group
+from django.shortcuts import redirect
+from django.contrib.auth.decorators import user_passes_test
+from django.contrib.auth import REDIRECT_FIELD_NAME
 
+def guest_required(view_func):
+    """
+    Décorateur qui permet d'accéder à une vue uniquement si l'utilisateur n'est pas connecté.
+    Si l'utilisateur est connecté, il est redirigé vers l'URL spécifiée.
+    """
+    def wrapper(request, *args, **kwargs):
+        if request.user.is_authenticated:
+            return redirect('dashboard')
+        return view_func(request, *args, **kwargs)
+    return wrapper
+
+@guest_required
 def register(request):
     if request.method == 'POST':
         form = CustomUserCreationForm(request.POST)
@@ -88,5 +103,5 @@ def toggle_theme(request):
         'status': 'success',
         'theme': user.theme_preference
     })
-# dans views.py (temporaire)
+
 

@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Bienvenue - ContactBook{% endblock %}
+
+{% block content %}
+<div class="row justify-content-center align-items-center vh-100">
+    <div class="col-md-8 text-center">
+        <div class="bg-primary p-5 rounded shadow">
+            <h1 class="display-4"><i class="fas fa-address-book me-3"></i> Bienvenue sur ContactBook !</h1>
+            <p class="lead">Votre carnet d'adresses intelligent et facile à utiliser.</p>
+            <hr class="my-4">
+            <p>Gérez vos contacts, organisez-les en groupes, marquez vos favoris et retrouvez facilement les informations dont vous avez besoin.</p>
+
+            {% if user.is_authenticated %}
+                <p class="mt-4">Vous êtes connecté en tant que <strong>{{ user.username }}</strong>.</p>
+                <div class="d-grid gap-2 d-md-block mt-3">
+                    <a class="btn btn-primary btn-lg" href="{% url 'contact_list' %}" role="button"><i class="fas fa-users me-2"></i> Voir mes contacts</a>
+                    <a class="btn btn-info btn-lg" href="{% url 'group_list' %}" role="button"><i class="fas fa-layer-group me-2"></i> Gérer les groupes</a>
+                </div>
+            {% else %}
+                <p class="mt-4">Prêt à organiser vos contacts ?</p>
+                <div class="d-grid gap-2 d-md-block mt-3">
+                    <a class="btn btn-success btn-lg" href="{% url 'register' %}" role="button"><i class="fas fa-user-plus me-2"></i> S'inscrire</a>
+                    <a class="btn btn-outline-primary btn-lg" href="{% url 'login' %}" role="button"><i class="fas fa-sign-in-alt me-2"></i> Se connecter</a>
+                </div>
+            {% endif %}
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+    console.log("Page de bienvenue chargée !");
+</script>
+{% endblock %}
