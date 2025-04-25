@@ -67,7 +67,7 @@ ContactBook est une application web moderne de gestion de contacts personnels d�
 ## Déploiement
 
 L'application peut être déployée sur diverses plateformes comme Vercel, Render, PythonAnywhere, ou Heroku. Consultez la documentation de ces services pour les instructions spécifiques de déploiement.
-Elle est actuellement accessible sur Vercel à l'addresse : repertoire.vercel.app
+Elle est actuellement accessible sur Vercel à l'addresse : https://repertoire.vercel.app
 
 ## Contribution
 
