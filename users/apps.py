@@ -5,4 +5,4 @@ class UsersConfig(AppConfig):
     name = 'users'
 
 def ready(self):
-    import users.signals  # Importer les signaux ici pour s'assurer qu'ils sont chargés
+    import users.signals # Importer le module signals pour s'assurer que les signaux sont enregistrés

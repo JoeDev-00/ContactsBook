@@ -21,45 +21,55 @@
 
 <body>
     <div class="header bg-primary ">
-        <div>
+        <div class="section1 ">
             <a class="navbar-brand" href="{% url 'dashboard' %}">
                 <i class="fas fa-address-book me-2"></i>ContactBook
             </a>
         </div>
         <div>
-            <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown"
-                    aria-expanded="false">
-                    <i class="fas fa-user-circle me-1"></i> {{ user.username }}
-                </a>
-                <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                    <li>
-                        <a class="dropdown-item" href="{% url 'user_preferences' %}">
-                            <i class="fas fa-cog me-1"></i> Préférences
+            <div class="section2 ">
+
+                <div>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                            data-bs-toggle="dropdown" aria-expanded="false">
+                            <i class="fas fa-user-circle me-1"></i> {{ user.username }}
                         </a>
+                        <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+                            <li>
+                                <a class="dropdown-item" href="{% url 'user_preferences' %}">
+                                    <i class="fas fa-cog me-1"></i> Préférences
+                                </a>
+                            </li>
+                            <li>
+                                <a class="dropdown-item" href="{% url 'user_sessions' %}">
+                                    <i class="fas fa-shield-alt me-1"></i> Sessions
+                                </a>
+                            </li>
+                            <li>
+                                <hr class="dropdown-divider">
+                            </li>
+                            <li>
+                                <a class="dropdown-item" href="{% url 'logout' %}">
+                                    <i class="fas fa-sign-out-alt me-1"></i> Déconnexion
+                                </a>
+                            </li>
+                        </ul>
                     </li>
-                    <li>
-                        <a class="dropdown-item" href="{% url 'user_sessions' %}">
-                            <i class="fas fa-shield-alt me-1"></i> Sessions
-                        </a>
-                    </li>
-                    <li>
-                        <hr class="dropdown-divider">
-                    </li>
-                    <li>
-                        <a class="dropdown-item" href="{% url 'logout' %}">
-                            <i class="fas fa-sign-out-alt me-1"></i> Déconnexion
-                        </a>
-                    </li>
-                </ul>
-            </li>
-        </div>
-        <div> 
-            <button id="theme-toggle" class="btn btn-link nav-link">
-                <i class="fas {% if request.user.theme_preference == 'dark' %}fa-sun{% else %}fa-moon{% endif %} me-1"></i>
-            </button>
+                </div>                
+                <div>
+                    <button id="theme-toggle" class="btn btn-link nav-link">
+                        <i
+                            class="fas {% if request.user.theme_preference == 'dark' %}fa-sun{% else %}fa-moon{% endif %} me-1"></i>
+                    </button>
+                </div>
+            </div>
+            <div>
+
+            </div>
         </div>
     </div>
+
 
     <div class="main mt-4 mb-5">
         <div class="aside">
@@ -119,10 +129,10 @@
             {% endif %}
 
             {% block content %}{% endblock %}
-        </div> 
-        
+        </div>
+
     </div>
-  
+
 
     <footer class="footer mt-auto py-3 ">
         <div class=" text-center">

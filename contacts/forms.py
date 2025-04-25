@@ -11,6 +11,7 @@ class ContactForm(forms.ModelForm):
             'birth_date': forms.DateInput(attrs={'type': 'date'}),
             'notes': forms.Textarea(attrs={'rows': 3}),
             'address': forms.Textarea(attrs={'rows': 2}),
+            'groups': forms.Select(attrs={'type': 'select'})
         }
 
     def __init__(self, *args, **kwargs):
