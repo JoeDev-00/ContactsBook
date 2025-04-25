@@ -9,9 +9,7 @@ from django.http import JsonResponse
 from .forms import CustomUserCreationForm, CustomAuthenticationForm, UserPreferencesForm
 from .models import UserSession
 from contacts.models import Group
-from django.core.management import call_command
-from django.http import HttpResponse
-from django.contrib.admin.views.decorators import staff_member_required
+
 def register(request):
     if request.method == 'POST':
         form = CustomUserCreationForm(request.POST)
@@ -92,8 +90,3 @@ def toggle_theme(request):
     })
 # dans views.py (temporaire)
 
-
-@staff_member_required
-def trigger_migrate(request):
-    call_command('migrate')
-    return HttpResponse("✅ Migrations exécutées avec succès !")
