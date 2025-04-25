@@ -1,6 +1,9 @@
 import os
 from pathlib import Path
-import dj_database_url
+from dotenv import load_dotenv
+from urllib.parse import urlparse
+
+load_dotenv()
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -10,7 +13,7 @@ SECRET_KEY = os.environ.get('SECRET_KEY', 'django-insecure-your-secret-key-here'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = os.environ.get('DEBUG', 'False') == 'True'
-DEBUG = True
+# DEBUG = True
 ALLOWED_HOSTS = ['127.0.0.1', '.vercel.app', '.now.sh', 'localhost']
 
 # Application definition
@@ -56,22 +59,29 @@ TEMPLATES = [
 WSGI_APPLICATION = 'Répertoire.wsgi.application'
 
 # Database
-# Pour Vercel, nous utilisons SQLite en mémoire (pour les démos)
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.sqlite3',
-#         'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
-#     }
-# }
-# Pour une application de production, vous devriez utiliser PostgreSQL
-DATABASES = {
-    'default': dj_database_url.config(
-        default=os.environ.get('DATABASE_URL'),
-        conn_max_age=600,
-        ssl_require=True
-    )
-}
 
+tmpPostgres = urlparse(os.getenv("DATABASE_URL"))
+# Pour Vercel, nous utilisons SQLite en mémoire (pour les démos)
+if DEBUG:
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.sqlite3',
+            'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        }
+    }
+    
+# Pour une application de production, nous utilisons PostgreSQL
+else:
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.postgresql',
+            'NAME': tmpPostgres.path.replace('/', ''),
+            'USER': tmpPostgres.username,
+            'PASSWORD': tmpPostgres.password,
+            'HOST': tmpPostgres.hostname,
+            'PORT': 5432,
+        }
+    }
 # Password validation
 AUTH_PASSWORD_VALIDATORS = [
     {
