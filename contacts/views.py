@@ -198,7 +198,7 @@ def group_list(request):
     groups = Group.objects.filter(user=request.user)
     
     if request.method == 'POST':
-        form = GroupForm(request.POST)
+        form = GroupForm(request.POST, user=request.user)
         if form.is_valid():
             group = form.save(commit=False)
             group.user = request.user
@@ -206,7 +206,7 @@ def group_list(request):
             messages.success(request, 'Groupe créé avec succès!')
             return redirect('group_list')
     else:
-        form = GroupForm()
+        form = GroupForm(user=request.user)
     
     return render(request, 'contacts/group_list.html', {
         'groups': groups,

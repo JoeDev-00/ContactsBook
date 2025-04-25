@@ -42,8 +42,16 @@ class GroupForm(forms.ModelForm):
         fields = ['name']
         
     def __init__(self, *args, **kwargs):
+        self.user = kwargs.pop('user', None)
         super(GroupForm, self).__init__(*args, **kwargs)
         self.fields['name'].widget.attrs['class'] = 'form-control'
+    
+    def clean_name(self):
+        name = self.cleaned_data['name']
+        if self.user and not self.instance.pk:  # Si c'est un nouveau groupe
+            if Group.objects.filter(name=name, user=self.user).exists():
+                raise forms.ValidationError(f'Le groupe "{name}" existe déjà.')
+        return name
 
 class ContactSearchForm(forms.Form):
     search = forms.CharField(

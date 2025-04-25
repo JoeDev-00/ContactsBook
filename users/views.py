@@ -8,14 +8,28 @@ from django.http import JsonResponse
 
 from .forms import CustomUserCreationForm, CustomAuthenticationForm, UserPreferencesForm
 from .models import UserSession
+from contacts.models import Group
 
 def register(request):
     if request.method == 'POST':
         form = CustomUserCreationForm(request.POST)
         if form.is_valid():
             user = form.save()
+            
+            # Créer des groupes par défaut pour l'utilisateur
+            default_groups = [
+                "Famille",
+                "Amis",
+                "Travail",
+                "Collègues",
+                "Importants"
+            ]
+            
+            for group_name in default_groups:
+                Group.objects.create(name=group_name, user=user)
+            
             login(request, user)
-            messages.success(request, "Inscription réussie! Bienvenue dans ContactBook.")
+            messages.success(request, "Inscription réussie! Bienvenue dans Répertoire.")
             return redirect('dashboard')
     else:
         form = CustomUserCreationForm()

@@ -36,17 +36,68 @@ body {
   min-height: 100vh;
   display: flex;
   flex-direction: column;
+  overflow: hidden;
+}
+
+.header {
+  background-color: var(--primary-color);
+  color: white;
+  padding: 1rem;
+  text-align: center;
+  font-size: 2rem;
+  font-weight: bold;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  justify-content: space-between;
+  flex-direction: row;
+  list-style: none;
+}
+
+.main {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  width: 100%;
+  height: 100vh;
+  padding: 20px;
+  margin: 20px;
+}
+
+.aside {
+  width: max-content;
+  padding: 30px;
+  margin-right: 270px;
 }
 
 .container {
   animation: fadeIn 0.5s ease-in-out;
+  display: flex;
+  flex-direction: column;
+  width: 70%;
+  height: 80%;
+  overflow-y: scroll;
+  padding: 20px;
+  scrollbar-width: thin;
+  scrollbar-color:rgb(178, 178, 178) transparent;
+}
+
+.return {
+  position: absolute;
+  /* right:0; */
+  z-index: 1000;
 }
 
 .card {
+  width: 80%;
+  align-self: center;
   border-radius: 0.5rem;
   box-shadow: 0 0.15rem 1.75rem 0 rgba(58, 59, 69, 0.15);
   margin-bottom: 1.5rem;
   animation: slideInUp 0.3s ease-in-out;
+  height: max-content;
+  padding: 10px;
+  margin-bottom: 90px;
 }
 
 .card-header {
@@ -54,9 +105,24 @@ body {
   border-top-right-radius: 0.5rem !important;
 }
 
+.card-body{
+  height: max-content;
+}
+
 /* Navbar */
 .navbar {
   box-shadow: 0 0.15rem 1.75rem 0 rgba(58, 59, 69, 0.15);
+  position: absolute;
+  left: 10px;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  width: 20%;
+  height: 70%;
+  padding: 10px;
+  font-size: 30px;
+  border-radius: 1.5rem;
 }
 
 .navbar-brand {
@@ -64,8 +130,27 @@ body {
   font-size: 1.2rem;
 }
 
+#navbarNav {
+position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  padding: 25px;
+}
+
 /* Footer */
 .footer {
+  background-color: var(--light-color);
+  color: var(--dark-color);
+  padding: 1rem;
+  text-align: center;
+  font-size: 0.9rem;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  width: 100%;
+  height: 50px;
   margin-top: auto;
   box-shadow: 0 -0.15rem 1.75rem 0 rgba(58, 59, 69, 0.05);
 }

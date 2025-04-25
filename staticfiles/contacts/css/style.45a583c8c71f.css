@@ -1,0 +1,144 @@
+/* Variables */
+:root {
+  --primary-color: #4e73df;
+  --secondary-color: #858796;
+  --success-color: #1cc88a;
+  --info-color: #36b9cc;
+  --warning-color: #f6c23e;
+  --danger-color: #e74a3b;
+  --light-color: #f8f9fc;
+  --dark-color: #5a5c69;
+}
+
+/* Animations */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes slideInUp {
+  from {
+    transform: translateY(20px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+/* General Styles */
+body {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.container {
+  animation: fadeIn 0.5s ease-in-out;
+  display: flex;
+  flex-direction:column;
+}
+
+.return{
+position: absolute;
+/* right:0; */
+z-index: 1000;
+}
+
+.card {
+  width: 80%;
+  align-self: center;
+  border-radius: 0.5rem;
+  box-shadow: 0 0.15rem 1.75rem 0 rgba(58, 59, 69, 0.15);
+  margin-bottom: 1.5rem;
+  animation: slideInUp 0.3s ease-in-out;
+}
+
+.card-header {
+  border-top-left-radius: 0.5rem !important;
+  border-top-right-radius: 0.5rem !important;
+}
+
+/* Navbar */
+.navbar {
+  box-shadow: 0 0.15rem 1.75rem 0 rgba(58, 59, 69, 0.15);
+}
+
+.navbar-brand {
+  font-weight: 700;
+  font-size: 1.2rem;
+}
+
+/* Footer */
+.footer {
+  margin-top: auto;
+  box-shadow: 0 -0.15rem 1.75rem 0 rgba(58, 59, 69, 0.05);
+}
+
+/* Dashboard Cards */
+.card .card-header {
+  font-weight: 700;
+}
+
+/* Contact List */
+.table img.rounded-circle,
+.table .rounded-circle {
+  border: 2px solid #e3e6f0;
+}
+
+/* Contact Detail */
+.copy-btn {
+  padding: 0;
+  color: var(--primary-color);
+}
+
+.copy-btn:hover {
+  color: var(--info-color);
+}
+
+/* Animations for interactive elements */
+.btn {
+  transition: all 0.2s ease-in-out;
+}
+
+.btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
+}
+
+.btn-group .btn:hover {
+  transform: translateY(-1px);
+  box-shadow: none;
+}
+
+/* Dark mode adjustments */
+[data-bs-theme="dark"] .card {
+  box-shadow: 0 0.15rem 1.75rem 0 rgba(0, 0, 0, 0.2);
+}
+
+[data-bs-theme="dark"] .navbar {
+  box-shadow: 0 0.15rem 1.75rem 0 rgba(0, 0, 0, 0.2);
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .display-5 {
+    font-size: 1.8rem;
+  }
+
+  .btn-group {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+  }
+
+  .btn-group .btn {
+    margin-bottom: 0.5rem;
+    border-radius: 0.25rem !important;
+  }
+}
