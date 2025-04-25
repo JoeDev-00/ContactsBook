@@ -1,25 +1,26 @@
 {
+  "version": 2,
   "builds": [
     {
-      "src": "contactbook/wsgi.py",
-      "use": "@vercel/python"
-    },
-    {
-      "src": "build_files.sh",
-      "use": "@vercel/static-build",
+      "src": "Répertoire/wsgi.py",
+      "use": "@vercel/python",
       "config": {
-        "distDir": "staticfiles"
+        "maxLambdaSize": "50mb"
       }
     }
   ],
   "routes": [
     {
       "src": "/static/(.*)",
-      "dest": "/staticfiles/$1"
+      "dest": "/static/$1"
+    },
+    {
+      "src": "/media/(.*)",
+      "dest": "/media/$1"
     },
     {
       "src": "/(.*)",
-      "dest": "contactbook/wsgi.py"
+      "dest": "Répertoire/wsgi.py"
     }
   ]
 }
