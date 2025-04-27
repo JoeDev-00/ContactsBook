@@ -3,6 +3,13 @@ from .models import Contact, Group
 from django.core.exceptions import ValidationError
 
 class ContactForm(forms.ModelForm):
+    
+    groups = forms.ModelChoiceField(
+        queryset=Group.objects.none(),  # queryset sera défini dans __init__
+        widget=forms.Select(attrs={'class': 'form-control'}),
+        required=False  # ou True si c'est obligatoire
+    )
+    
     class Meta:
         model = Contact
         fields = ['first_name', 'last_name', 'phone_number', 'email', 'address', 
@@ -11,7 +18,6 @@ class ContactForm(forms.ModelForm):
             'birth_date': forms.DateInput(attrs={'type': 'date'}),
             'notes': forms.Textarea(attrs={'rows': 3}),
             'address': forms.Textarea(attrs={'rows': 2}),
-            'groups': forms.Select(attrs={'type': 'select'})
         }
 
     def __init__(self, *args, **kwargs):

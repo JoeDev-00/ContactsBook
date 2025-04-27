@@ -108,13 +108,16 @@ def contact_create(request):
             contact = form.save(commit=False)
             contact.user = request.user
             contact.save()
-            form.save_m2m()  # Pour sauvegarder les relations ManyToMany
+            group = form.cleaned_data.get('groups')
+            if group:
+                contact.groups.set([group])  # Mettre le groupe choisi
             messages.success(request, 'Contact créé avec succès!')
             return redirect('contact_detail', pk=contact.pk)
     else:
         form = ContactForm(user=request.user)
     
     return render(request, 'contacts/contact_form.html', {'form': form, 'title': 'Ajouter un contact'})
+
 
 @login_required
 def contact_update(request, pk):
