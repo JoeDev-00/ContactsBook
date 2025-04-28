@@ -2,6 +2,7 @@ import os
 from pathlib import Path
 from dotenv import load_dotenv
 from urllib.parse import urlparse
+import dj_database_url
 
 load_dotenv()
 
@@ -61,7 +62,7 @@ WSGI_APPLICATION = 'Répertoire.wsgi.application'
 # Database
 
 tmpPostgres = urlparse(os.getenv("DATABASE_URL"))
-# Pour Vercel, nous utilisons SQLite en mémoire (pour les démos)
+#  nous utilisons SQLite en mémoire (pour les démos)
 if DEBUG:
     DATABASES = {
         'default': {
@@ -70,17 +71,12 @@ if DEBUG:
         }
     }
     
-# Pour une application de production, nous utilisons PostgreSQL
+# Pour Vercel,, nous utilisons PostgreSQL
 else:
     DATABASES = {
-        'default': {
-            'ENGINE': 'django.db.backends.postgresql',
-            'NAME': tmpPostgres.path.replace('/', ''),
-            'USER': tmpPostgres.username,
-            'PASSWORD': tmpPostgres.password,
-            'HOST': tmpPostgres.hostname,
-            'PORT': 5432,
-        }
+        'default': dj_database_url.parse(
+            os.getenv('DATABASE_URL', 'postgresql://postgres:*******@yamanote.proxy.rlwy.net:53381/railway')
+        )
     }
 # Password validation
 AUTH_PASSWORD_VALIDATORS = [
