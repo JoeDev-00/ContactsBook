@@ -74,11 +74,19 @@ if DEBUG:
 # Pour Vercel,, nous utilisons PostgreSQL
 else:
    DATABASES = {
-        'default': {
-            'ENGINE': 'django.db.backends.sqlite3',
-            'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
-        }
-    }
+    'default': dj_database_url.parse(
+        os.getenv('DATABASE_URL', 'postgresql://postgres:*******@yamanote.proxy.rlwy.net:53381/railway'),
+        conn_max_age=600,
+        ssl_require=True
+    )
+}
+
+# Adapter l'ENGINE si on utilise pg8000
+if DATABASES['default']['ENGINE'] == 'django.db.backends.postgresql':
+    DATABASES['default']['ENGINE'] = 'django.db.backends.postgresql_psycopg2'
+
+# Correction pour utiliser pg8000
+DATABASES['default']['OPTIONS'] = {'driver': 'pg8000'}
     
 # Password validation
 AUTH_PASSWORD_VALIDATORS = [
