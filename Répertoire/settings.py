@@ -74,7 +74,7 @@ if DEBUG:
 else:
    DATABASES = {
         'default': dj_database_url.parse(
-            os.getenv('DATABASE_URL', 'postgresql://postgres:GGCkxpLVtxyBNGPLrFhqJoeHFaFjErTK@yamanote.proxy.rlwy.net:53381/railway')
+            os.getenv('DATABASE_URL', 'postgresql://postgres:******@yamanote.proxy.rlwy.net:53381/railway')
         )
     }
     
