@@ -2,20 +2,28 @@ from django import forms
 from .models import Contact, Group
 from django.core.exceptions import ValidationError
 
+from datetime import date
+
 class ContactForm(forms.ModelForm):
     
     groups = forms.ModelChoiceField(
-        queryset=Group.objects.none(),  # queryset sera défini dans __init__
+        queryset=Group.objects.none(),
         widget=forms.Select(attrs={'class': 'form-control'}),
-        required=False  # ou True si c'est obligatoire
+        required=False
     )
-    
+
     class Meta:
         model = Contact
         fields = ['first_name', 'last_name', 'phone_number', 'email', 'address', 
                   'avatar', 'birth_date', 'notes', 'is_favorite', 'groups']
         widgets = {
-            'birth_date': forms.DateInput(attrs={'type': 'date'}),
+            'birth_date': forms.DateInput(
+                attrs={
+                    'type': 'date',
+                    'min': '1900-01-01',
+                    'max': date.today().strftime('%Y-%m-%d')
+                }
+            ),
             'notes': forms.Textarea(attrs={'rows': 3}),
             'address': forms.Textarea(attrs={'rows': 2}),
         }
@@ -26,8 +34,7 @@ class ContactForm(forms.ModelForm):
         
         if user:
             self.fields['groups'].queryset = Group.objects.filter(user=user)
-            
-        # Ajouter des classes pour le style
+        
         for field_name, field in self.fields.items():
             field.widget.attrs['class'] = 'form-control'
             if field_name == 'is_favorite':
@@ -42,6 +49,7 @@ class ContactForm(forms.ModelForm):
             raise ValidationError("Le prénom ou le nom doit être renseigné.")
         
         return cleaned_data
+
 
 class GroupForm(forms.ModelForm):
     class Meta:
