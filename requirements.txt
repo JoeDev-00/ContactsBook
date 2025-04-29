@@ -4,7 +4,7 @@ dj-database-url==2.2.0
 Django==3.2.24
 django-crispy-forms==1.13.0
 Pillow==8.3.2
-
+pg8000=1.29.8
 python-dotenv==0.20.0
 pytz>=2023.3
 sqlparse==0.4.4
