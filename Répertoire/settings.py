@@ -4,8 +4,10 @@ from dotenv import load_dotenv
 from urllib.parse import urlparse
 import dj_database_url
 import pg8000
-import sys
-sys.modules['psycopg2'] = pg8000
+import os
+# Patch psycopg2 => pg8000
+if os.getenv('USE_PG8000', 'false').lower() == 'true':
+    import patch_pg8000
 load_dotenv()
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -75,20 +77,26 @@ if DEBUG:
     
 # Pour Vercel,, nous utilisons PostgreSQL
 else:
-   DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'railway',
-        'USER': 'postgres',
-        'PASSWORD': 'GGCkxpLVtxyBNGPLrFhqJoeHFaFjErTK',
-        'HOST': 'yamanote.proxy.rlwy.net',
-        'PORT': '53381',
-        'OPTIONS': {
-            'sslmode': 'require',
-            'client_encoding': 'utf8'
+   if os.getenv('USE_PG8000', 'false').lower() == 'true':
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.postgresql',
+            'NAME': os.getenv('PG_NAME', 'railway'),
+            'USER': os.getenv('PG_USER', 'postgres'),
+            'PASSWORD': os.getenv('PG_PASSWORD', '*******'),
+            'HOST': os.getenv('PG_HOST', 'yamanote.proxy.rlwy.net'),
+            'PORT': os.getenv('PG_PORT', '53381'),
+            'OPTIONS': {
+                'sslmode': 'require',
+                'client_encoding': 'utf8'
+            }
         }
     }
-}
+   else:
+      import dj_database_url
+      DATABASES = {
+        'default': dj_database_url.config(conn_max_age=600, ssl_require=True)
+    }
     
 # Password validation
 AUTH_PASSWORD_VALIDATORS = [
