@@ -80,7 +80,7 @@ else:
         'ENGINE': 'django.db.backends.postgresql',
         'NAME': 'railway',
         'USER': 'postgres',
-        'PASSWORD': '',
+        'PASSWORD': 'GGCkxpLVtxyBNGPLrFhqJoeHFaFjErTK',
         'HOST': 'yamanote.proxy.rlwy.net',
         'PORT': '53381',
         'OPTIONS': {
