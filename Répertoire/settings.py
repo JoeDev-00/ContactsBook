@@ -83,7 +83,7 @@ else:
             'ENGINE': 'django.db.backends.postgresql',
             'NAME': os.getenv('PG_NAME', 'railway'),
             'USER': os.getenv('PG_USER', 'postgres'),
-            'PASSWORD': os.getenv('PG_PASSWORD', '*******'),
+            'PASSWORD': os.getenv('PG_PASSWORD', 'GGCkxpLVtxyBNGPLrFhqJoeHFaFjErTK'),
             'HOST': os.getenv('PG_HOST', 'yamanote.proxy.rlwy.net'),
             'PORT': os.getenv('PG_PORT', '53381'),
             'OPTIONS': {
