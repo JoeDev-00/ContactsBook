@@ -75,7 +75,7 @@ if DEBUG:
 else:
    DATABASES = {
     'default': dj_database_url.parse(
-        os.getenv('DATABASE_URL', 'postgresql://postgres:*******@yamanote.proxy.rlwy.net:53381/railway'),
+        os.getenv('DATABASE_URL', 'postgresql:+pg8000//postgres:*******@yamanote.proxy.rlwy.net:53381/railway'),
         conn_max_age=600,
         ssl_require=True
     )
