@@ -126,7 +126,15 @@ def contact_update(request, pk):
     if request.method == 'POST':
         form = ContactForm(request.POST, request.FILES, instance=contact, user=request.user)
         if form.is_valid():
-            form.save()
+            contact = form.save(commit=False)
+            contact.save()
+            
+            groups = form.cleaned_data.get('groups')
+            if groups:
+                contact.groups.set(groups)
+            else:
+                contact.groups.set([])  # 🔒 vide proprement s'il n'y a rien
+
             messages.success(request, 'Contact modifié avec succès!')
             return redirect('contact_detail', pk=contact.pk)
     else:
