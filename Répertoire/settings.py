@@ -88,7 +88,8 @@ else:
             'PORT': os.getenv('PG_PORT', '53381'),
             'OPTIONS': {
                 'sslmode': 'require',
-                'client_encoding': 'utf8'
+                'client_encoding': 'utf8',
+'driver': 'pg8000'
             }
         }
     }
